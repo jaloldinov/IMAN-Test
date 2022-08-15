@@ -1,0 +1,21 @@
+syntax="proto3";
+
+package service;
+option go_package="genproto/first_service";
+
+import "google/protobuf/empty.proto";
+
+service FirstService {
+        rpc InsertPosts(google.protobuf.Empty) returns (InsertPostsResponse) {}
+        rpc CheckPosts(google.protobuf.Empty) returns (CheckPostsResponse) {}
+}
+
+message InsertPostsResponse {
+        string message = 1;
+}
+
+message CheckPostsResponse {
+        string message = 1;
+        string error = 2;
+}
+
