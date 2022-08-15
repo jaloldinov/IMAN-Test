@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FirstServiceClient interface {
 	InsertPosts(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*InsertPostsResponse, error)
+	CheckPosts(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CheckPostsResponse, error)
 }
 
 type firstServiceClient struct {
@@ -43,11 +44,21 @@ func (c *firstServiceClient) InsertPosts(ctx context.Context, in *emptypb.Empty,
 	return out, nil
 }
 
+func (c *firstServiceClient) CheckPosts(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CheckPostsResponse, error) {
+	out := new(CheckPostsResponse)
+	err := c.cc.Invoke(ctx, "/service.FirstService/CheckPosts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FirstServiceServer is the server API for FirstService service.
 // All implementations must embed UnimplementedFirstServiceServer
 // for forward compatibility
 type FirstServiceServer interface {
 	InsertPosts(context.Context, *emptypb.Empty) (*InsertPostsResponse, error)
+	CheckPosts(context.Context, *emptypb.Empty) (*CheckPostsResponse, error)
 	mustEmbedUnimplementedFirstServiceServer()
 }
 
@@ -57,6 +68,9 @@ type UnimplementedFirstServiceServer struct {
 
 func (UnimplementedFirstServiceServer) InsertPosts(context.Context, *emptypb.Empty) (*InsertPostsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InsertPosts not implemented")
+}
+func (UnimplementedFirstServiceServer) CheckPosts(context.Context, *emptypb.Empty) (*CheckPostsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckPosts not implemented")
 }
 func (UnimplementedFirstServiceServer) mustEmbedUnimplementedFirstServiceServer() {}
 
@@ -89,6 +103,24 @@ func _FirstService_InsertPosts_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FirstService_CheckPosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FirstServiceServer).CheckPosts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/service.FirstService/CheckPosts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FirstServiceServer).CheckPosts(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FirstService_ServiceDesc is the grpc.ServiceDesc for FirstService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -99,6 +131,10 @@ var FirstService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InsertPosts",
 			Handler:    _FirstService_InsertPosts_Handler,
+		},
+		{
+			MethodName: "CheckPosts",
+			Handler:    _FirstService_CheckPosts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

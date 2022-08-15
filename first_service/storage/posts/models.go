@@ -25,3 +25,9 @@ type Meta struct {
 	Pagination Pagination `json:"pagination"`
 	Data       []Data     `json:"data"`
 }
+
+// type CheckPostsResponse struct {
+// 	Success   string `db:"success" json:"success"`
+// 	ErrorResp string `db:"error_resp" json:"error_resp"`
+// 	CreatedAt string `db:"created_at" json:"created_at"`
+// }

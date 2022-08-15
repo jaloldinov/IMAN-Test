@@ -36,3 +36,12 @@ func (s firstService) InsertPosts(ctx context.Context, req *emptypb.Empty) (*fir
 		Message: resp,
 	}, nil
 }
+
+func (s firstService) CheckPosts(ctx context.Context, req *emptypb.Empty) (*first_service.CheckPostsResponse, error) {
+	resp, err := s.strg.Data().CheckPosts()
+	if err != nil {
+		s.log.Error("Checking insert post", logger.Error(err))
+	}
+
+	return resp, nil
+}
