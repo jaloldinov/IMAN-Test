@@ -43,7 +43,7 @@ func (h *handlerV1) ListPosts(c *gin.Context) {
 	)
 
 	if err != nil {
-		h.handleErrorResponse(c, 500, "error while getting posts", err)
+		h.handleErrorResponse(c, 500, "connection refused", err)
 		return
 	}
 

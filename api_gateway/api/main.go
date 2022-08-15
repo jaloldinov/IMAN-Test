@@ -52,6 +52,8 @@ func New(opt *RouterOptions) *gin.Engine {
 	apiV1 := router.Group("/v1")
 
 	// First service insert handler
+	apiV1.GET("/api", handlerV1.InsertPosts)
+	apiV1.GET("/api/check", handlerV1.CheckPosts)
 
 	// Secomd Service (GRUD)
 	apiV1.GET("/post/list", handlerV1.ListPosts)

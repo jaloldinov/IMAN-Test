@@ -11,7 +11,7 @@ import (
 
 func SetUpServer(cfg config.Config, log logger.LoggerI, strg storage.StorageI) (grpcServer *grpc.Server) {
 	grpcServer = grpc.NewServer()
-	first_service.RegisterFirstServiceServer(grpcServer, service.NewDataService(cfg, log, strg))
+	first_service.RegisterFirstServiceServer(grpcServer, service.NewFirstService(cfg, log, strg))
 
 	return
 }

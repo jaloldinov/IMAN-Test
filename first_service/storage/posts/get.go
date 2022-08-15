@@ -14,8 +14,8 @@ var results []Meta = []Meta{}
 func first25Pages(wg *sync.WaitGroup) {
 	defer wg.Done()
 
-	// for i := 0; i < 25; i++ {
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 25; i++ {
+		// for i := 0; i < 1; i++ {
 
 		strToInt := strconv.Itoa(i)
 		URL := `https://gorest.co.in/public/v1/posts?page=` + strToInt
@@ -41,8 +41,8 @@ func first25Pages(wg *sync.WaitGroup) {
 func second25Pages(wg *sync.WaitGroup) {
 	defer wg.Done()
 
-	// for i := 25; i < 50; i++ {
-	for i := 1; i < 2; i++ {
+	for i := 25; i < 50; i++ {
+		// for i := 1; i < 2; i++ {
 
 		strToInt := strconv.Itoa(i)
 		URL := `https://gorest.co.in/public/v1/posts?page=` + strToInt

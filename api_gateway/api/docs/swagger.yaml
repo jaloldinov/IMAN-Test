@@ -1,4 +1,16 @@
 definitions:
+  first_service.CheckPostsResponse:
+    properties:
+      error:
+        type: string
+      message:
+        type: string
+    type: object
+  first_service.InsertPostsResponse:
+    properties:
+      message:
+        type: string
+    type: object
   models.Post:
     properties:
       body:
@@ -53,6 +65,82 @@ info:
   title: Test task from IMAN Invest
   version: "1.1"
 paths:
+  /v1/api:
+    get:
+      consumes:
+      - application/json
+      description: Gets post from open api and saves it to db
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.ResponseModel'
+            - properties:
+                data:
+                  $ref: '#/definitions/first_service.InsertPostsResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.ResponseModel'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.ResponseModel'
+            - properties:
+                error:
+                  type: string
+              type: object
+      summary: saves post to db
+      tags:
+      - First Service
+  /v1/api/check:
+    get:
+      consumes:
+      - application/json
+      description: Checks latest operation whether save post is successful or not
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: desc
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.ResponseModel'
+            - properties:
+                data:
+                  $ref: '#/definitions/first_service.CheckPostsResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.ResponseModel'
+            - properties:
+                error:
+                  type: string
+              type: object
+        "500":
+          description: Server Error
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.ResponseModel'
+            - properties:
+                error:
+                  type: string
+              type: object
+      summary: check if post is saved to db
+      tags:
+      - First Service
   /v1/post/{post_id}:
     delete:
       consumes:

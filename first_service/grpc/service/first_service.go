@@ -17,7 +17,7 @@ type firstService struct {
 	first_service.UnimplementedFirstServiceServer
 }
 
-func NewDataService(cfg config.Config, log logger.LoggerI, strg storage.StorageI) *firstService {
+func NewFirstService(cfg config.Config, log logger.LoggerI, strg storage.StorageI) *firstService {
 	return &firstService{
 		cfg:  cfg,
 		log:  log,

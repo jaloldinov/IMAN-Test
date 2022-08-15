@@ -53,7 +53,7 @@ func Load() Config {
 
 	config := Config{}
 
-	config.ServiceName = cast.ToString(getOrReturnDefaultValue("SERVICE_NAME", "First_Service"))
+	config.ServiceName = cast.ToString(getOrReturnDefaultValue("SERVICE_NAME", "Second_Service"))
 	config.Environment = cast.ToString(getOrReturnDefaultValue("ENVIRONMENT", DebugMode))
 	config.Version = cast.ToString(getOrReturnDefaultValue("VERSION", "1.0"))
 
@@ -75,7 +75,7 @@ func Load() Config {
 	config.PasscodeLength = cast.ToInt(getOrReturnDefaultValue("PASSCODE_LENGTH", "6"))
 
 	config.ServiceHost = cast.ToString(getOrReturnDefaultValue("SERVICE_HOST", "0.0.0.0"))
-	config.GRPCPort = cast.ToString(getOrReturnDefaultValue("GRPC_PORT", ":9001"))
+	config.GRPCPort = cast.ToString(getOrReturnDefaultValue("GRPC_PORT", ":9002"))
 
 	config.PostgresMaxConnections = cast.ToInt(getOrReturnDefaultValue("POSTGRES_MAX_CONNECTIONS", 5))
 
