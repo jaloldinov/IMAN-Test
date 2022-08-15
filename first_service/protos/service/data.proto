@@ -1,0 +1,17 @@
+syntax="proto3";
+
+package service;
+option go_package="genproto/first_service";
+
+import "google/protobuf/empty.proto";
+
+
+
+service FirstService {
+        rpc InsertPosts(google.protobuf.Empty) returns (InsertPostsResponse) {}
+}
+
+message InsertPostsResponse {
+        string message = 1;
+}
+
